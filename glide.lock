@@ -1,0 +1,82 @@
+hash: f96606750631c7744dac7c651ebe583dd69c22ff47a2077bb064721b5a47a09d
+updated: 2016-07-05T22:42:52.057223867Z
+imports:
+- name: github.com/asaskevich/govalidator
+  version: 9699ab6b38bee2e02cd3fe8b99ecf67665395c96
+  repo: https://github.com/asaskevich/govalidator
+- name: github.com/go-openapi/analysis
+  version: abc9a6171f5bf03ada39aead1aa7fd7bbd44d50f
+- name: github.com/go-openapi/errors
+  version: d24ebc2075bad502fac3a8ae27aa6dd58e1952dc
+- name: github.com/go-openapi/jsonpointer
+  version: 46af16f9f7b149af66e5d1bd010e3574dc06de98
+- name: github.com/go-openapi/jsonreference
+  version: 13c6e3589ad90f49bd3e3bbe2c2cb3d7a4142272
+- name: github.com/go-openapi/loads
+  version: 18441dfa706d924a39a030ee2c3b1d8d81917b38
+- name: github.com/go-openapi/runtime
+  version: 11e322eeecc1032d5a0a96c566ed53f2b5c26e22
+  subpackages:
+  - middleware
+  - security
+  - middleware/denco
+  - middleware/header
+  - middleware/untyped
+- name: github.com/go-openapi/spec
+  version: e9fab754f5629065e6b7a6100301226545d4477e
+- name: github.com/go-openapi/strfmt
+  version: dfda818c47a4ae5a1dde75ac776f34b2c95de993
+- name: github.com/go-openapi/swag
+  version: 1d0bd113de87027671077d3c71eb3ac5d7dbba72
+- name: github.com/go-openapi/validate
+  version: deaf2c9013bc1a7f4c774662259a506ba874d80f
+- name: github.com/go-swagger/go-swagger
+  version: ff42df2bf231f6a12383b36332f8364254ea86d6
+  subpackages:
+  - swag
+  - httpkit/middleware
+  - errors
+  - httpkit
+  - httpkit/middleware/header
+  - httpkit/middleware/untyped
+  - internal/validate
+  - spec
+  - strfmt
+  - httpkit/validate
+  - jsonpointer
+  - jsonreference
+- name: github.com/gorilla/context
+  version: a8d44e7d8e4d532b6a27a02dd82abb31cc1b01bd
+- name: github.com/gorilla/mux
+  version: 9c19ed558d5df4da88e2ade9c8940d742aef0e7e
+- name: github.com/jessevdk/go-flags
+  version: 6b9493b3cb60367edd942144879646604089e3f7
+- name: github.com/lib/pq
+  version: dd3290b2f71a8b30bee8e4e75a337a825263d26f
+- name: github.com/mailru/easyjson
+  version: 69e532648c145d4ae3b9214d166e20938eae8ef3
+  subpackages:
+  - jlexer
+  - jwriter
+  - buffer
+- name: github.com/naoina/denco
+  version: 9af2ba0e24214bac003821f4a501b131b2e04c75
+  repo: https://github.com/naoina/denco
+- name: github.com/opennota/urlesc
+  version: 5fa9ff0392746aeae1c4b37fcc42c65afa7a9587
+  repo: https://github.com/opennota/urlesc
+- name: github.com/PuerkitoBio/purell
+  version: d69616f51cdfcd7514d6a380847a152dfc2a749d
+  repo: https://github.com/PuerkitoBio/purell
+- name: github.com/tylerb/graceful
+  version: 9a3d4236b03bb5d26f7951134d248f9d5510d599
+- name: golang.org/x/net
+  version: e7da8edaa52631091740908acaf2c2d4c9b3ce90
+  repo: https://go.googlesource.com/net
+  subpackages:
+  - context
+  - netutil
+- name: gopkg.in/yaml.v2
+  version: a83829b6f1293c91addabc89d0571c246397bbf4
+  repo: https://gopkg.in/yaml.v2
+devImports: []

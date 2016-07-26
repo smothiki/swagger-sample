@@ -1,0 +1,44 @@
+swagger: "2.0"
+info:
+  title: Workflow Manager
+  version: 2.0.0
+produces:
+  - application/json
+consumes:
+  - application/json
+schemes:
+  - http
+# securityDefinitions:
+#   oauth:
+#     type: oauth2
+#     flow: accessCode
+#     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=361421161936-brgc1gr6e9u442uvr00ekndf1ck0hkbe.apps.googleusercontent.com&redirect_uri=http://excess-skylight.104.154.82.14.nip.io/jaffa&scope=openid+email&state=state-token'
+#     tokenUrl: 'https://www.googleapis.com/oauth2/v4/token'
+#     scopes:
+#         basic: "read"
+# security:
+#   - oauth:
+#      - basic
+# authorizations:
+#   oauth2:
+#     grantTypes:
+#       authorization_code:
+#         tokenEndpoint:
+#           - tokenName: auth_code
+#           - url: http://petstore.swagger.wordnik.com/oauth/token
+#         tokenRequestEndpoint:
+#           - url : http://petstore.swagger.wordnik.com/oauth/token
+#     implicit:
+#       loginEndpoint:
+#         url : http://petstore.swagger.wordnik.com/oauth/dialog
+paths:
+  /ping:
+    get:
+      # security:
+      #   - oauth:
+      #       - basic
+      responses:
+        200:
+          description: server ping success
+        default:
+          description: unexpected error
