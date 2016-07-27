@@ -9,16 +9,9 @@ consumes:
 schemes:
   - http
 # securityDefinitions:
-#   oauth:
-#     type: oauth2
-#     flow: accessCode
-#     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=361421161936-brgc1gr6e9u442uvr00ekndf1ck0hkbe.apps.googleusercontent.com&redirect_uri=http://excess-skylight.104.154.82.14.nip.io/jaffa&scope=openid+email&state=state-token'
-#     tokenUrl: 'https://www.googleapis.com/oauth2/v4/token'
-#     scopes:
-#         basic: "read"
-# security:
-#   - oauth:
-#      - basic
+#   basicAuth:
+#     type: basic
+#     description: HTTP Basic Authentication. Works over `HTTP` and `HTTPS`
 # authorizations:
 #   oauth2:
 #     grantTypes:
@@ -31,12 +24,47 @@ schemes:
 #     implicit:
 #       loginEndpoint:
 #         url : http://petstore.swagger.wordnik.com/oauth/dialog
+securityDefinitions:
+  oauth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: 'https://instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token'
+    scopes:
+      basic: |
+        to read any and all data related to a user (e.g. following/followed-by
+         lists, photos, etc.) (granted by default)
 paths:
   /ping:
     get:
-      # security:
-      #   - oauth:
-      #       - basic
+      security:
+       - basicAuth: []
+      responses:
+        200:
+          description: server ping success
+        default:
+          description: unexpected error
+  /jing:
+    get:
+      operationId: getClusterById
+      parameters:
+        - name: id
+          in: query
+          type: string
+          required: true
+        - name: kd
+          in: query
+          type: string
+          required: true
+      responses:
+        200:
+          description: server ping success
+        default:
+          description: unexpected error
+  /king:
+    get:
+      security:
+       - oauth:
+         - basic
       responses:
         200:
           description: server ping success

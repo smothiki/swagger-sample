@@ -9,37 +9,37 @@ import (
 	middleware "github.com/go-openapi/runtime/middleware"
 )
 
-// GetPingHandlerFunc turns a function with the right signature into a get ping handler
-type GetPingHandlerFunc func(GetPingParams, interface{}) middleware.Responder
+// GetKingHandlerFunc turns a function with the right signature into a get king handler
+type GetKingHandlerFunc func(GetKingParams, interface{}) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetPingHandlerFunc) Handle(params GetPingParams, principal interface{}) middleware.Responder {
+func (fn GetKingHandlerFunc) Handle(params GetKingParams, principal interface{}) middleware.Responder {
 	return fn(params, principal)
 }
 
-// GetPingHandler interface for that can handle valid get ping params
-type GetPingHandler interface {
-	Handle(GetPingParams, interface{}) middleware.Responder
+// GetKingHandler interface for that can handle valid get king params
+type GetKingHandler interface {
+	Handle(GetKingParams, interface{}) middleware.Responder
 }
 
-// NewGetPing creates a new http.Handler for the get ping operation
-func NewGetPing(ctx *middleware.Context, handler GetPingHandler) *GetPing {
-	return &GetPing{Context: ctx, Handler: handler}
+// NewGetKing creates a new http.Handler for the get king operation
+func NewGetKing(ctx *middleware.Context, handler GetKingHandler) *GetKing {
+	return &GetKing{Context: ctx, Handler: handler}
 }
 
-/*GetPing swagger:route GET /ping getPing
+/*GetKing swagger:route GET /king getKing
 
-GetPing get ping API
+GetKing get king API
 
 */
-type GetPing struct {
+type GetKing struct {
 	Context *middleware.Context
-	Handler GetPingHandler
+	Handler GetKingHandler
 }
 
-func (o *GetPing) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (o *GetKing) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, _ := o.Context.RouteInfo(r)
-	var Params = NewGetPingParams()
+	var Params = NewGetKingParams()
 
 	uprinc, err := o.Context.Authorize(r, route)
 	if err != nil {

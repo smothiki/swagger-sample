@@ -32,19 +32,19 @@ func configureAPI(api *operations.SwaggerSampleAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	api.OauthAuth = func(token string, scopes []string) (interface{}, error) {
-		fmt.Println(token)
-		return "admin", nil
-		//return nil, errors.NotImplemented("oauth2 bearer auth (oauth) has not yet been implemented")
+	api.BasicAuthAuth = func(user string, pass string) (interface{}, error) {
+		if user == "jaffa" && pass == "pass" {
+			return "admin", nil
+		}
+		return nil, errors.NotImplemented("basic auth  (basicAuth) has not yet been implemented")
 	}
 
-	api.GetKingHandler = operations.GetKingHandlerFunc(func(params operations.GetKingParams, principal interface{}) middleware.Responder {
-		return middleware.NotImplemented("operation .GetKing has not yet been implemented")
-	})
 	api.GetPingHandler = operations.GetPingHandlerFunc(func(params operations.GetPingParams, principal interface{}) middleware.Responder {
 		return middleware.NotImplemented("operation .GetPing has not yet been implemented")
 	})
 	api.GetClusterByIDHandler = operations.GetClusterByIDHandlerFunc(func(params operations.GetClusterByIDParams) middleware.Responder {
+		fmt.Println(params.ID)
+		fmt.Println(params.Kd)
 		return middleware.NotImplemented("operation .GetClusterByID has not yet been implemented")
 	})
 

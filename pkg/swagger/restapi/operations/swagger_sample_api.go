@@ -11,6 +11,7 @@ import (
 	loads "github.com/go-openapi/loads"
 	runtime "github.com/go-openapi/runtime"
 	middleware "github.com/go-openapi/runtime/middleware"
+	security "github.com/go-openapi/runtime/security"
 	spec "github.com/go-openapi/spec"
 	strfmt "github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -44,8 +45,16 @@ type SwaggerSampleAPI struct {
 	// JSONProducer registers a producer for a "application/json" mime type
 	JSONProducer runtime.Producer
 
+	// OauthAuth registers a functin that takes an access token and a collection of required scopes and returns a principal
+	// it performs authentication based on an oauth2 bearer token provided in the request
+	OauthAuth func(string, []string) (interface{}, error)
+
+	// GetKingHandler sets the operation handler for the get king operation
+	GetKingHandler GetKingHandler
 	// GetPingHandler sets the operation handler for the get ping operation
 	GetPingHandler GetPingHandler
+	// GetClusterByIDHandler sets the operation handler for the get cluster by Id operation
+	GetClusterByIDHandler GetClusterByIDHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -104,8 +113,20 @@ func (o *SwaggerSampleAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
+	if o.OauthAuth == nil {
+		unregistered = append(unregistered, "OauthAuth")
+	}
+
+	if o.GetKingHandler == nil {
+		unregistered = append(unregistered, "GetKingHandler")
+	}
+
 	if o.GetPingHandler == nil {
 		unregistered = append(unregistered, "GetPingHandler")
+	}
+
+	if o.GetClusterByIDHandler == nil {
+		unregistered = append(unregistered, "GetClusterByIDHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -123,7 +144,17 @@ func (o *SwaggerSampleAPI) ServeErrorFor(operationID string) func(http.ResponseW
 // AuthenticatorsFor gets the authenticators for the specified security schemes
 func (o *SwaggerSampleAPI) AuthenticatorsFor(schemes map[string]spec.SecurityScheme) map[string]runtime.Authenticator {
 
-	return nil
+	result := make(map[string]runtime.Authenticator)
+	for name, scheme := range schemes {
+		switch name {
+
+		case "oauth":
+
+			result[name] = security.BearerAuth(scheme.Name, o.OauthAuth)
+
+		}
+	}
+	return result
 
 }
 
@@ -184,7 +215,17 @@ func (o *SwaggerSampleAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/king"] = NewGetKing(o.context, o.GetKingHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/ping"] = NewGetPing(o.context, o.GetPingHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers[strings.ToUpper("GET")] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/jing"] = NewGetClusterByID(o.context, o.GetClusterByIDHandler)
 
 }
 
